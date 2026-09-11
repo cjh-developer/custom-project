@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <comment>서버 공통 설정</comment>
+
+    <!-- 서버 시간 지역  -->
+    <entry key="custom.server.time.zone">Asia/Seoul</entry>
+
+    <!-- SHA-256 | SHA-512 | NONE(평문, 테스트 전용) -->
+    <entry key="custom.password.algorithm">SHA-512</entry>
+
+    <!-- HEX | BASE64 -->
+    <entry key="custom.password.format">HEX</entry>
+
+    <entry key="custom.generate.oid.format">cus_</entry>
+
+</properties>
