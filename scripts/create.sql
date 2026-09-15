@@ -29,3 +29,43 @@ CREATE TABLE cus_cm_cache (
                               update_time   BIGINT       NOT NULL,
                               PRIMARY KEY (cache_group, cache_name)
 ) COMMENT='서버 간 캐시 무효화 신호';
+
+-- 비밀번호 이력 (password.allow.history / check.history.count)
+CREATE TABLE cus_cm_password_history (
+                                         oid           VARCHAR(255) NOT NULL,
+                                         user_oid      VARCHAR(255) NOT NULL,
+                                         password      VARCHAR(255) NOT NULL,
+                                         password_salt VARCHAR(255),
+                                         insert_user   VARCHAR(255),
+                                         insert_time   BIGINT NOT NULL,
+                                         update_user   VARCHAR(255),
+                                         update_time   BIGINT NOT NULL,
+                                         PRIMARY KEY (oid),
+                                         KEY index_cus_cm_password_history_user (user_oid, insert_time DESC)
+);
+
+-- 로그인 이력 (login.allow.save.history / check.save.history)
+CREATE TABLE cus_cm_login_history (
+                                      oid          VARCHAR(255) NOT NULL,
+                                      user_oid     VARCHAR(255),
+                                      user_id      VARCHAR(255) NOT NULL,
+                                      login_ip     VARCHAR(50),
+                                      login_result VARCHAR(20)  NOT NULL,   -- SUCCESS / FAIL_PASSWORD / FAIL_LOCKED ...
+                                      user_agent   VARCHAR(500),
+                                      insert_user  VARCHAR(255),
+                                      insert_time  BIGINT NOT NULL,
+                                      update_user  VARCHAR(255),
+                                      update_time  BIGINT NOT NULL,
+                                      PRIMARY KEY (oid),
+                                      KEY index_cus_cm_login_history_user (user_id, insert_time DESC),
+                                      KEY index_cus_cm_login_history_time (insert_time)
+);
+
+-- 로그인 유지 (login.allow.remember) — Spring Security 표준 스키마
+CREATE TABLE persistent_logins (
+                                   username  VARCHAR(64)  NOT NULL,
+                                   series    VARCHAR(64)  NOT NULL,
+                                   token     VARCHAR(64)  NOT NULL,
+                                   last_used TIMESTAMP    NOT NULL,
+                                   PRIMARY KEY (series)
+);
