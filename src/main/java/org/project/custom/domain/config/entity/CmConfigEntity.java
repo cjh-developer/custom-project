@@ -3,7 +3,7 @@ package org.project.custom.domain.config.entity;
 import jakarta.persistence.*;
 import org.jspecify.annotations.Nullable;
 import org.project.custom.common.constants.CommonErrorCode;
-import org.project.custom.common.constants.ConfigValueType;
+import org.project.custom.domain.config.constatns.ConfigValueType;
 import org.project.custom.common.converter.BooleanToYnConverter;
 import org.project.custom.common.exception.CustomException;
 import org.project.custom.common.jpa.entity.AbstractBaseEntity;

@@ -1,4 +1,4 @@
-package org.project.custom.common.constants;
+package org.project.custom.domain.config.constatns;
 
 import org.project.custom.common.util.StringCheck;
 

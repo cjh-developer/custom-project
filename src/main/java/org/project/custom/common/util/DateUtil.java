@@ -128,6 +128,20 @@ public class DateUtil {
         return millis + days    * DAY_MILLIS;
     }
 
+    /**
+     * 월 더하기
+     * @param millis
+     * @param months
+     * @return
+     */
+    public static long plusMonths(long millis, long months) {
+        return toZonedDateTime(millis).plusMonths(months).toInstant().toEpochMilli();
+    }
+
+    public static long minusMonths(long millis, long months){
+        return toZonedDateTime(millis).minusMonths(months).toInstant().toEpochMilli();
+    }
+
     /** 지금부터 minutes 분 뒤(밀리초). 토큰 만료 시각 계산 등에 쓴다. */
     public static long futureMinutes(long minutes) {
         return plusMinutes(currentTime(), minutes);

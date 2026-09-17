@@ -2,12 +2,12 @@
 INSERT INTO cus_cm_config
 (oid, config_group, config_value, default_value, value_type, use_yn, sort_order, description, insert_time, update_time) VALUES
 ('userid.min.length',        'USERID', NULL, '5',                'NUMBER',  'Y',  10, '사용자 아이디 최소 길이',                                0, 0),
-('userid.max.length',        'USERID', NULL, '20',               'NUMBER',  'Y',  20, '사용자 아이디 최대 길이',                                0, 0),
+('userid.max.length',        'USERID', NULL, '30',               'NUMBER',  'Y',  20, '사용자 아이디 최대 길이',                                0, 0),
 ('userid.check.pattern',     'USERID', NULL, '^[a-zA-Z0-9_-]+$', 'STRING',  'Y',  30, '사용자 아이디 검사 정규식',                              0, 0),
 ('userid.check.first.word',  'USERID', NULL, 'ANY',              'STRING',  'Y',  40, '아이디 시작 문자(UPPER/LOWER/ALPHA/NUMBER/SPECIAL/ANY)',  0, 0),
 ('userid.allow.space',       'USERID', NULL, 'N',                'BOOLEAN', 'Y',  50, '아이디 공백 문자 허용 여부',                             0, 0),
 ('userid.allow.korean',      'USERID', NULL, 'N',                'BOOLEAN', 'Y',  60, '아이디 한글 허용 여부',                                  0, 0),
-('userid.allow.consecutive', 'USERID', NULL, 'Y',                'BOOLEAN', 'Y',  70, '아이디 연속 문자열 허용 여부',                           0, 0),
+('userid.allow.consecutive', 'USERID', NULL, 'N',                'BOOLEAN', 'Y',  70, '아이디 연속 문자열 허용 여부',                           0, 0),
 ('userid.check.consecutive', 'USERID', NULL, '3',                'NUMBER',  'Y',  80, '아이디 최대 사용 가능 연속 문자열 길이',                 0, 0),
 ('userid.check.word',        'USERID', NULL, 'admin,administrator,root,system,test,guest', 'STRING', 'Y', 90, '사용 불가 아이디 목록(콤마 구분)', 0, 0);
 
@@ -31,7 +31,7 @@ INSERT INTO cus_cm_config
 ('password.allow.email',         'PASSWORD', NULL, 'N',  'BOOLEAN', 'Y', 150, '사용자 이메일 포함 허용 여부',            0, 0),
 ('password.allow.history',       'PASSWORD', NULL, 'N',  'BOOLEAN', 'Y', 160, '이전 비밀번호 재사용 허용 여부',          0, 0),
 ('password.check.history.count', 'PASSWORD', NULL, '3',  'NUMBER',  'Y', 170, '이전 비밀번호 제한 개수',                 0, 0),
-('password.check.expired',       'PASSWORD', NULL, '90', 'NUMBER',  'Y', 180, '비밀번호 만료 일수(0=만료 없음)',         0, 0),
+('password.check.expired',       'PASSWORD', NULL, '180', 'NUMBER',  'Y', 180, '비밀번호 만료 일수(0=만료 없음)',         0, 0),
 ('password.check.init',          'PASSWORD', NULL, 'Y',  'BOOLEAN', 'Y', 190, '최초 로그인 시 비밀번호 변경 강제 여부',  0, 0),
 ('password.check.init.expired',  'PASSWORD', NULL, '7',  'NUMBER',  'Y', 200, '초기 비밀번호 유효 기간(일)',             0, 0),
 ('password.allow.salt',          'PASSWORD', NULL, 'N',  'BOOLEAN', 'Y', 210, 'salt 사용 여부',                          0, 0),
@@ -43,13 +43,13 @@ INSERT INTO cus_cm_config
 ('login.allow.limit.fail.count',   'LOGIN', NULL, 'Y',   'BOOLEAN', 'Y',  10, '로그인 실패 횟수 제한 사용 여부',                0, 0),
 ('login.check.limit.fail.count',   'LOGIN', NULL, '5',   'NUMBER',  'Y',  20, '로그인 실패 최대 허용 횟수',                     0, 0),
 ('login.allow.locked',             'LOGIN', NULL, 'Y',   'BOOLEAN', 'Y',  30, '실패 초과 시 계정 잠금 사용 여부',               0, 0),
-('login.check.locked.time',        'LOGIN', NULL, '30',  'NUMBER',  'Y',  40, '잠긴 계정 자동 해제 시간(분, 0=수동)',           0, 0),
+('login.check.locked.time',        'LOGIN', NULL, '5',  'NUMBER',  'Y',  40, '잠긴 계정 자동 해제 시간(분, 0=수동)',           0, 0),
 ('login.allow.duplicated',         'LOGIN', NULL, 'N',   'BOOLEAN', 'Y',  50, '중복 로그인 허용 여부',                          0, 0),
-('login.check.duplicated.method',  'LOGIN', NULL, 'PRE', 'STRING',  'Y',  60, '중복 로그인 처리(PRE=기존종료/POST=신규차단)',   0, 0),
+('login.check.duplicated.method',  'LOGIN', NULL, 'BEFORE', 'STRING',  'Y',  60, '중복 로그인 처리(BEFORE=기존종료/AFTER=신규차단)',   0, 0),
 ('login.check.duplicated.count',   'LOGIN', NULL, '1',   'NUMBER',  'Y',  70, '동시 로그인 최대 개수',                          0, 0),
-('login.allow.auto.logout',        'LOGIN', NULL, 'Y',   'BOOLEAN', 'Y',  80, '미사용 시 자동 로그아웃 사용 여부',              0, 0),
+('login.allow.auto.logout',        'LOGIN', NULL, 'N',   'BOOLEAN', 'Y',  80, '미사용 시 자동 로그아웃 사용 여부',              0, 0),
 ('login.check.auto.logout',        'LOGIN', NULL, '120', 'NUMBER',  'Y',  90, '자동 로그아웃까지의 미사용 시간(분)',            0, 0),
-('login.allow.remember',           'LOGIN', NULL, 'Y',   'BOOLEAN', 'Y', 100, '로그인 유지 사용 여부',                          0, 0),
+('login.allow.remember',           'LOGIN', NULL, 'N',   'BOOLEAN', 'Y', 100, '로그인 유지 사용 여부',                          0, 0),
 ('login.allow.save.history',       'LOGIN', NULL, 'Y',   'BOOLEAN', 'Y', 110, '로그인 이력 저장 여부',                          0, 0),
 ('login.check.save.history',       'LOGIN', NULL, '12',  'NUMBER',  'Y', 120, '로그인 이력 유지 기간(달)',                      0, 0);
 
@@ -73,4 +73,4 @@ INSERT INTO cus_cm_config
 ('user.check.init.status',          'USER', NULL, 'ACTIVE', 'STRING',  'Y', 30, '사용자 등록 초기 상태(UserStatus)', 0, 0),
 ('user.check.delete.user.info',     'USER', NULL, 'N',      'BOOLEAN', 'Y', 40, '사용자 삭제 시 정보 삭제 여부',     0, 0),
 ('user.check.enc.delete.user.info', 'USER', NULL, 'Y',      'BOOLEAN', 'Y', 50, '삭제 사용자 정보 암호화 여부',      0, 0),
-('user.check.out.time',             'USER', NULL, '6',      'NUMBER',  'Y', 60, '탈퇴 사용자 유지 기간(달)',         0, 0);
+('user.check.out.time',             'USER', NULL, '12',      'NUMBER',  'Y', 60, '탈퇴 사용자 유지 기간(달)',         0, 0);

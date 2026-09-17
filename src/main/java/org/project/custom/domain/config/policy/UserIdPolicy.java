@@ -1,6 +1,6 @@
 package org.project.custom.domain.config.policy;
 
-import org.project.custom.common.constants.UserIdFirstWordType;
+import org.project.custom.domain.config.constatns.UserIdFirstWordType;
 import org.project.custom.domain.config.constatns.ConfigKeys;
 import org.project.custom.domain.config.service.CmCacheService;
 
@@ -34,7 +34,7 @@ public final class UserIdPolicy {
      * @return
      */
     public int getMaxLength(){
-        return config.getInt(ConfigKeys.USERID_MAX_LENGTH, 30);
+        return config.getInt(ConfigKeys.USERID_MAX_LENGTH, 20);
     }
 
     /**
@@ -43,6 +43,14 @@ public final class UserIdPolicy {
      */
     public UserIdFirstWordType getFirstWord(){
         return config.getEnum(UserIdFirstWordType.class, ConfigKeys.USERID_CHECK_FIRST_WORD, UserIdFirstWordType.ANY);
+    }
+
+    /**
+     * 아이디 정규식 검사
+     * @return
+     */
+    public String getPattern(){
+        return config.getString(ConfigKeys.USERID_CHECK_PATTERN, "^[a-zA-Z0-9_-]+$");
     }
 
     /**
@@ -69,29 +77,21 @@ public final class UserIdPolicy {
         return config.getList(ConfigKeys.USERID_CHECK_WORD);
     }
 
+    /**
+     * 연속 문자열 허용 여부
+     * @return
+     */
     public boolean getAllowConsecutive(){
         return config.getBoolean(ConfigKeys.USERID_ALLOW_CONSECUTIVE, false);
     }
 
+    /**
+     * 연속 문자열 최대 허용 길이
+     * @return
+     */
     public int getMaxConsecutive(){
         return config.getInt(ConfigKeys.USERID_CHECK_CONSECUTIVE, 3);
     }
 
-    /**
-     * 연속 문자 검사 수행 여부
-     * @return
-     */
-    public boolean isConsecutiveCheck(){
-        return !getAllowConsecutive() && getMaxConsecutive() > 0;
-    }
-
-    /**
-     * 시작 문자 검사 수행 여부
-     * @return
-     */
-    public boolean isFirstWordCheck(){
-        return UserIdFirstWordType.ANY != getFirstWord();
-    }
-
-
+    
 }
